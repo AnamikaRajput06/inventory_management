@@ -1,0 +1,68 @@
+<%= form_with(model: invoice, data: { controller: "invoice" }) do |form| %>
+  <% if invoice.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+      <ul>
+        <% invoice.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="w-50">
+    <div class="form-group py-2">
+      <%= form.label :customer_name %>
+      <%= form.text_field :customer_name, class: "form-control" %>
+    </div>
+
+    <div class="form-group py-2">
+      <%= form.label :customer_email %>
+      <%= form.text_field :customer_email, class: "form-control" %>
+    </div>
+
+    <div class="form-group py-2">
+      <%= form.label :status %>
+      <%= form.select :status,
+          Invoice.statuses.map { |k, _| [k.upcase, k] },
+          { prompt: "Select Status" },
+          { class: "form-control" } %>
+    </div>
+
+    <div class="form-group py-2">
+      <%= form.label :discount %>
+      <%= form.number_field :discount, class: "form-control", step: "0.01" %>
+    </div>
+
+    <div id="invoice-items">
+      <h3>Products</h3>
+      <div id="invoice-items">
+        <%= form.fields_for :invoice_items do |invoice_item_form| %>
+          <%= render "invoice_item_fields", f: invoice_item_form %>
+        <% end %>
+      </div>
+
+      <!-- Hidden Template -->
+      <template id="invoice-item-template">
+        <%= form.fields_for :invoice_items, InvoiceItem.new, child_index: "NEW_RECORD" do |invoice_item_form| %>
+          <%= render "invoice_item_fields", f: invoice_item_form %>
+        <% end %>
+      </template>
+
+      <%= link_to "Add Product", "#", class: "btn btn-success",
+            data: { action: "invoice#addItem" } %>
+    </div>
+
+
+    <div class="form-group py-2">
+      <%= form.label :total_amount %>
+      <%= form.text_field :total_amount, class: "form-control", readonly: true %>
+    </div>
+  </div>
+
+
+  <div class="d-flex">
+    <%= form.submit class: 'btn btn-primary'%>
+    <%= link_to 'Back', invoices_path, class: 'btn btn-secondary mx-3' %>
+  </div>
+<% end %>

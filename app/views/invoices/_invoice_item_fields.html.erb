@@ -1,0 +1,37 @@
+<div data-nested-form class="nested-fields border p-3 my-2">
+  <div class="row">
+    <div class="col-3">
+      <%= f.label :product_id %>
+      <%= f.collection_select :product_id, Product.all, :id, :name,
+          { prompt: "Select a product" },
+          class: "form-control product-select",
+          data: {
+            action: "change->invoice#updatePrice",
+            price: Product.pluck(:id, :price).to_h
+          } %>
+    </div>
+
+    <div class="col-2">
+      <label>Unit Price</label>
+      <input type="text" class="form-control item-price" readonly>
+    </div>
+
+    <div class="col-3">
+      <%= f.label :quantity %>
+      <%= f.number_field :quantity, class: "form-control quantity-input",
+          min: 1,
+          data: { action: "change->invoice#updatePrice" } %>
+    </div>
+
+    <div class="col-2">
+      <label>Line Total</label>
+      <input type="text" class="form-control item-total" readonly>
+    </div>
+
+    <div class="col-2">
+      <%= link_to "Remove", "#", class: "btn btn-danger", data: { action: "invoice#removeItem" } %>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,17 @@
+
+<%= form_for :session, url: session_path do |form| %>
+  <div class="text-field form-group py-2">
+    <%= form.label :email %>
+    <%= form.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="password-field form-group py-2">
+    <%= form.label :password %>
+    <%= form.password_field :password, class: "form-control"%>
+  </div>
+
+  <div class="submit-field py-2">
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
+

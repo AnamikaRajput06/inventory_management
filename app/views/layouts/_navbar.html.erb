@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container ">
+    <a class="navbar-brand" href="#">Inventory Management Portal</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <%= link_to 'Products', products_path, class: "nav-link #{'active' if current_page?(products_path) || controller_name == 'Products'}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Invoices', invoices_path, class: "nav-link #{'active' if current_page?(invoices_path) || controller_name == 'invoices'}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Reports', reports_path, class: "nav-link #{'active' if current_page?(reports_path) || controller_name == 'reports'}" %>
+          </li>
+          <!-- Add this where your navigation links are -->
+        </ul>
+      <ul class="navbar-nav ms-auto align-items-center">
+        <% if signed_in? %>
+          <span class="text-light">Hi, <%= current_user.first_name %>!</span>
+          <li class="nav-item dropdown">
+
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; font-size: 20px;">
+                <%= current_user.first_name.first.upcase %>
+              </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li>
+                <%= button_to "Logout", sign_out_path, method: :delete, class: "dropdown-item" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Sign in", sign_in_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
