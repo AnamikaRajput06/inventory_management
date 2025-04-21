@@ -78,8 +78,6 @@ GEM
       ffi (~> 1.15)
       ffi-compiler (~> 1.0)
     ast (2.4.2)
-    autoprefixer-rails (10.4.19.0)
-      execjs (~> 2)
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.4.0)
@@ -87,8 +85,7 @@ GEM
     bindex (0.8.1)
     bootsnap (1.18.4)
       msgpack (~> 1.2)
-    bootstrap (5.3.3)
-      autoprefixer-rails (>= 9.1.0)
+    bootstrap (5.3.5)
       popper_js (>= 2.11.8, < 3)
     brakeman (7.0.0)
       racc
@@ -121,7 +118,6 @@ GEM
     email_validator (2.2.4)
       activemodel
     erubi (1.13.1)
-    execjs (2.10.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     ffi (1.17.1-aarch64-linux-gnu)
@@ -349,7 +345,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bootstrap (~> 5.3.3)
+  bootstrap (~> 5.3.5)
   brakeman
   capybara
   clearance
